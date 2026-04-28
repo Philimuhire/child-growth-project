@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Beans",
+    "local_name": "Ibihaza (beans)",
+    "category": "protein",
+    "nutrients": ["protein", "iron", "zinc", "fiber", "energy"],
+    "description": "Rich in protein and iron. A staple in Rwandan diet. Can be mashed for young children or cooked as a stew.",
+    "age_min": 6
+  },
+  {
+    "name": "Maize Porridge",
+    "local_name": "Igikoma (maize porridge)",
+    "category": "carbohydrate",
+    "nutrients": ["energy", "fiber", "vitamin_b"],
+    "description": "Traditional porridge made from maize flour. Can be enriched with milk, groundnut paste, or mashed fruit for added nutrition.",
+    "age_min": 6
+  },
+  {
+    "name": "Bananas",
+    "local_name": "Ibitoki (bananas)",
+    "category": "fruit",
+    "nutrients": ["potassium", "vitamin_b6", "energy", "vitamin_c"],
+    "description": "Widely available in Rwanda. Cooking bananas can be mashed for complementary feeding. Good source of energy.",
+    "age_min": 6
+  },
+  {
+    "name": "Sweet Potatoes",
+    "local_name": "Ibijumba (sweet potatoes)",
+    "category": "carbohydrate",
+    "nutrients": ["vitamin_a", "energy", "fiber", "vitamin_c"],
+    "description": "Orange-fleshed sweet potatoes are rich in vitamin A. Can be boiled and mashed for young children.",
+    "age_min": 6
+  },
+  {
+    "name": "Milk",
+    "local_name": "Amata (milk)",
+    "category": "dairy",
+    "nutrients": ["calcium", "protein", "vitamin_d", "fat", "energy"],
+    "description": "Excellent source of calcium and protein. Can be added to porridge or given as a drink. Cow's milk available across Rwanda.",
+    "age_min": 0
+  },
+  {
+    "name": "Eggs",
+    "local_name": "Amagi (eggs)",
+    "category": "protein",
+    "nutrients": ["protein", "iron", "vitamin_a", "zinc", "fat"],
+    "description": "Highly nutritious and easy to prepare. Boiled or scrambled eggs provide complete protein. Excellent for growing children.",
+    "age_min": 6
+  },
+  {
+    "name": "Groundnuts",
+    "local_name": "Ubunyobwa (groundnuts)",
+    "category": "protein",
+    "nutrients": ["protein", "energy", "fat", "zinc", "iron"],
+    "description": "Energy-dense food rich in protein and healthy fats. Groundnut paste can be added to porridge to increase caloric density.",
+    "age_min": 9
+  },
+  {
+    "name": "Green Vegetables",
+    "local_name": "Imboga (vegetables)",
+    "category": "vegetable",
+    "nutrients": ["vitamin_a", "iron", "fiber", "vitamin_c", "calcium"],
+    "description": "Dark green leafy vegetables like amaranth and spinach are rich in iron and vitamin A. Should be finely chopped for young children.",
+    "age_min": 6
+  },
+  {
+    "name": "Sorghum Porridge",
+    "local_name": "Igikoma cy'amasaka (sorghum porridge)",
+    "category": "carbohydrate",
+    "nutrients": ["energy", "iron", "fiber", "protein"],
+    "description": "Nutritious alternative to maize porridge. Rich in iron and can be fortified with milk or groundnut paste.",
+    "age_min": 6
+  },
+  {
+    "name": "Avocado",
+    "local_name": "Avoka (avocado)",
+    "category": "fruit",
+    "nutrients": ["fat", "energy", "potassium", "vitamin_c", "fiber"],
+    "description": "Excellent source of healthy fats and energy. Can be mashed and mixed with other foods. Widely grown in Rwanda.",
+    "age_min": 6
+  },
+  {
+    "name": "Cassava",
+    "local_name": "Imyumbati (cassava)",
+    "category": "carbohydrate",
+    "nutrients": ["energy", "vitamin_c", "fiber"],
+    "description": "Good source of energy. Should be properly prepared and combined with protein-rich foods for balanced nutrition.",
+    "age_min": 9
+  },
+  {
+    "name": "Small Fish",
+    "local_name": "Isambaza (small fish)",
+    "category": "protein",
+    "nutrients": ["protein", "calcium", "iron", "zinc", "fat"],
+    "description": "Small dried fish from Lake Kivu. Rich in calcium when eaten whole. Can be ground into powder and added to porridge.",
+    "age_min": 6
+  },
+  {
+    "name": "Pumpkin",
+    "local_name": "Igihaza (pumpkin)",
+    "category": "vegetable",
+    "nutrients": ["vitamin_a", "energy", "fiber", "vitamin_c"],
+    "description": "Rich in vitamin A and energy. Can be boiled and mashed. Pumpkin leaves are also nutritious.",
+    "age_min": 6
+  },
+  {
+    "name": "Soybean",
+    "local_name": "Soya (soybean)",
+    "category": "protein",
+    "nutrients": ["protein", "energy", "fat", "iron", "calcium"],
+    "description": "High-quality plant protein. Soy flour can be mixed with cereal flour to make enriched porridge.",
+    "age_min": 6
+  },
+  {
+    "name": "Breast Milk",
+    "local_name": "Amashereka (breast milk)",
+    "category": "dairy",
+    "nutrients": ["protein", "fat", "energy", "calcium", "vitamin_a", "zinc"],
+    "description": "The ideal food for infants. Exclusive breastfeeding recommended for the first 6 months, continuing alongside complementary foods until age 2.",
+    "age_min": 0
+  }
+]
