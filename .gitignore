@@ -14,6 +14,9 @@ env/
 model/data/*.xlsx
 model/data/*.csv
 
+# Training artifacts duplicated in backend/app/ml_artifacts/
+model/artifacts/*.joblib
+
 # Jupyter
 .ipynb_checkpoints/
 
