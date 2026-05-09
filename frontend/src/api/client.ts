@@ -3,9 +3,12 @@
 import axios from 'axios';
 import type { ChildInput, PredictionResponse, RecommendationResponse, HealthResponse } from '../types';
 
-// Shared axios instance
+// In dev, falls back to '/api' so Vite's proxy hits localhost:8000.
+// In production, set VITE_API_BASE_URL to the deployed backend (e.g. https://your-api.onrender.com/api).
+const baseURL = import.meta.env.VITE_API_BASE_URL || '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
 });
 
