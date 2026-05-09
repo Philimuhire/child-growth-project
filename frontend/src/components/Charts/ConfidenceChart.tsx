@@ -35,7 +35,7 @@ export default function ConfidenceChart({ probabilities, predictedClass }: Props
           <CartesianGrid strokeDasharray="3 3" horizontal={false} />
           <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
           <YAxis type="category" dataKey="name" width={100} />
-          <Tooltip formatter={(value: number) => `${value}%`} />
+          <Tooltip formatter={(value) => `${value}%`} />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {/* One Cell per bar with the class color */}
             {data.map((entry) => (

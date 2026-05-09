@@ -35,10 +35,10 @@ export default function GrowthChart({ zScores }: Props) {
           <XAxis dataKey="name" />
           <YAxis domain={[-4, 4]} />
           <Tooltip
-            formatter={(value: number) => value.toFixed(2)}
-            labelFormatter={(label: string) => {
-              const item = data.find((d) => d.name === label);
-              return item ? item.label : label;
+            formatter={(value) => Number(value).toFixed(2)}
+            labelFormatter={(label) => {
+              const item = data.find((d) => d.name === String(label));
+              return item ? item.label : String(label);
             }}
           />
           <Legend />
