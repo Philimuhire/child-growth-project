@@ -1,5 +1,6 @@
 # Configuration: paths, API metadata, and CORS settings
 
+import os
 from pathlib import Path
 
 # Base directory of the app
@@ -23,10 +24,13 @@ API_TITLE = "Child Growth Monitor API"
 API_DESCRIPTION = "AI-powered child growth monitoring and nutrition recommendation system for Rwanda"
 API_VERSION = "1.0.0"
 
-# Allowed frontend origins for CORS
-ALLOWED_ORIGINS = [
+# Allowed frontend origins for CORS.
+# Add deployed frontend URLs via the ALLOWED_ORIGINS env var (comma-separated).
+_DEFAULT_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
 ]
+_extra = os.getenv("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS = _DEFAULT_ORIGINS + [o.strip() for o in _extra.split(",") if o.strip()]
