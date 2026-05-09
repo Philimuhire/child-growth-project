@@ -15,7 +15,6 @@ class ChildInput(BaseModel):
     sex: Sex = Field(description="Child's sex")
     weight_kg: float = Field(gt=0, le=30, description="Weight in kilograms")
     height_cm: float = Field(gt=30, le=130, description="Height/length in centimeters")
-    muac_cm: float = Field(gt=5, le=25, description="Mid-upper arm circumference in cm")
 
     # Demographic and socioeconomic data
     wealth_index: WealthIndex = Field(description="Household wealth index")
@@ -58,7 +57,6 @@ class ChildInput(BaseModel):
                     "sex": "male",
                     "weight_kg": 10.5,
                     "height_cm": 82.0,
-                    "muac_cm": 14.2,
                     "wealth_index": "middle",
                     "mothers_education": "primary",
                     "residence_type": "rural",

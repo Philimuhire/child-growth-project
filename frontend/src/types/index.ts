@@ -41,7 +41,6 @@ export interface ChildInput {
   sex: Sex;
   weight_kg: number;
   height_cm: number;
-  muac_cm: number;
   wealth_index: WealthIndex;
   mothers_education: EducationLevel;
   residence_type: ResidenceType;

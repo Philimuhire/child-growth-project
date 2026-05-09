@@ -73,7 +73,6 @@ class MLService:
             "sex": self._encode_categorical("sex", child.sex.value),
             "weight_kg": child.weight_kg,
             "height_cm": child.height_cm,
-            "muac_cm": child.muac_cm,
             "wealth_index": self._encode_categorical("wealth_index", child.wealth_index.value),
             "mothers_education": self._encode_categorical("mothers_education", child.mothers_education.value),
             "residence_type": self._encode_categorical("residence_type", child.residence_type.value),

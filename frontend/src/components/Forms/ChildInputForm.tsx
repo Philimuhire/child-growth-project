@@ -15,7 +15,6 @@ const initialForm: ChildInput = {
   sex: 'male',
   weight_kg: 10.5,
   height_cm: 82,
-  muac_cm: 14.2,
   wealth_index: 'middle',
   mothers_education: 'primary',
   residence_type: 'rural',
@@ -67,8 +66,6 @@ export default function ChildInputForm({ onSubmit, loading }: Props) {
       newErrors.weight_kg = 'Weight must be 0-30 kg';
     if (form.height_cm <= 30 || form.height_cm > 130)
       newErrors.height_cm = 'Height must be 30-130 cm';
-    if (form.muac_cm <= 5 || form.muac_cm > 25)
-      newErrors.muac_cm = 'MUAC must be 5-25 cm';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -184,27 +181,6 @@ export default function ChildInputForm({ onSubmit, loading }: Props) {
           {errors.height_cm && (
             <p className="text-xs text-red-500 mt-1">{errors.height_cm}</p>
           )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
-            MUAC (cm)
-          </label>
-          <input
-            type="number"
-            step="0.1"
-            min={5}
-            max={25}
-            value={form.muac_cm}
-            onChange={(e) => update('muac_cm', parseFloat(e.target.value) || 0)}
-            className={`w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none ${
-              errors.muac_cm ? 'border-red-300' : 'border-slate-300'
-            }`}
-          />
-          {errors.muac_cm && (
-            <p className="text-xs text-red-500 mt-1">{errors.muac_cm}</p>
-          )}
-          <p className="text-[10px] text-slate-400 mt-1">Mid-Upper Arm Circumference</p>
         </div>
 
         {/* Demographic Data */}
