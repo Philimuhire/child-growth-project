@@ -102,16 +102,6 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-
-        <section className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-amber-800 mb-2">Disclaimer</h2>
-          <p className="text-sm text-amber-700">
-            This tool is designed to support healthcare workers and caregivers in
-            early detection of malnutrition. It is not a substitute for
-            professional medical diagnosis. Always consult a qualified healthcare
-            provider for clinical decisions regarding child health and nutrition.
-          </p>
-        </section>
       </div>
     </div>
   );

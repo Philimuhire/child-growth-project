@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import ChildInputForm from '../components/Forms/ChildInputForm';
 import PredictionCard from '../components/Results/PredictionCard';
-import RiskIndicator from '../components/Results/RiskIndicator';
 import ZScoreDisplay from '../components/Results/ZScoreDisplay';
 import ConfidenceChart from '../components/Charts/ConfidenceChart';
 import GrowthChart from '../components/Charts/GrowthChart';
@@ -107,14 +106,10 @@ export default function AssessmentPage() {
 
               {activeTab === 'results' && (
                 <div className="space-y-6">
-                  {/* Prediction card and risk indicator */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <PredictionCard
-                      predictedClass={prediction.predicted_class}
-                      confidence={prediction.confidence}
-                    />
-                    <RiskIndicator riskLevel={prediction.risk_level} />
-                  </div>
+                  <PredictionCard
+                    predictedClass={prediction.predicted_class}
+                    confidence={prediction.confidence}
+                  />
 
                   <ZScoreDisplay zScores={prediction.z_scores} />
 
