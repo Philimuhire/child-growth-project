@@ -28,6 +28,15 @@ const mealConfig: Record<string, { label: string; time: string; initial: string;
   dinner:      { label: 'Dinner',             time: '6 - 7 PM',   initial: 'D', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
 };
 
+// Ordered groups for the Recommended Local Foods section
+const foodGroups: { key: string; label: string }[] = [
+  { key: 'protein',      label: 'Proteins' },
+  { key: 'carbohydrate', label: 'Carbohydrates' },
+  { key: 'vegetable',    label: 'Vegetables' },
+  { key: 'fruit',        label: 'Fruits' },
+  { key: 'dairy',        label: 'Dairy' },
+];
+
 export default function NutritionPlan({ recommendations }: Props) {
   return (
     <div className="space-y-6">
@@ -67,10 +76,13 @@ export default function NutritionPlan({ recommendations }: Props) {
 
       {/* Daily meal plan */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-semibold text-slate-900">Daily Meal Plan</h3>
           <span className="text-xs text-slate-500">Suggested schedule</span>
         </div>
+        <p className="text-sm text-slate-600 mb-5">
+          This is a sample day showing the meal schedule and balance to follow. Repeat this structure daily, but vary the specific foods using the Recommended Local Foods below.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {Object.entries(recommendations.meal_plan).map(([meal, items]) => {
             const config = mealConfig[meal] || { label: meal, time: '', initial: '?', color: 'bg-slate-100 text-slate-700 border-slate-200' };
@@ -105,13 +117,44 @@ export default function NutritionPlan({ recommendations }: Props) {
         </div>
       </div>
 
-      {/* List of recommended foods */}
+      {/* Recommended foods grouped by category */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <h3 className="text-lg font-semibold text-slate-900 mb-4">Recommended Local Foods</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {recommendations.foods.map((food) => (
-            <FoodCard key={food.name} food={food} />
-          ))}
+        <div className="space-y-6">
+          {foodGroups.map(({ key, label }) => {
+            const items = recommendations.foods.filter((f) => f.category === key);
+            if (items.length === 0) return null;
+            return (
+              <div key={key}>
+                <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
+                  {label}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {items.map((food) => (
+                    <FoodCard key={food.name} food={food} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          {/* Fallback bucket for any categories not in the predefined groups */}
+          {(() => {
+            const known = new Set(foodGroups.map((g) => g.key));
+            const others = recommendations.foods.filter((f) => !known.has(f.category));
+            if (others.length === 0) return null;
+            return (
+              <div>
+                <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
+                  Other
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {others.map((food) => (
+                    <FoodCard key={food.name} food={food} />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
     </div>

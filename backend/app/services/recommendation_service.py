@@ -68,9 +68,12 @@ KEY_MESSAGES = {
 }
 
 
-# Filter out foods the child is too young for
+# Filter out foods the child is too young or too old for
 def _filter_foods_by_age(foods: list[dict], age_months: int) -> list[dict]:
-    return [f for f in foods if f.get("age_min", 0) <= age_months]
+    return [
+        f for f in foods
+        if f.get("age_min", 0) <= age_months <= f.get("age_max", 60)
+    ]
 
 
 # Rank foods by relevance to the nutritional condition
