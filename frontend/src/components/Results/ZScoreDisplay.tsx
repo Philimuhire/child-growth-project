@@ -33,24 +33,24 @@ export default function ZScoreDisplay({ zScores }: Props) {
   const entries = ['waz', 'haz', 'whz', 'baz'] as const;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-      <h3 className="text-lg font-semibold text-slate-900 mb-4">Z-Score Results</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Z-Score Results</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {entries.map((key) => {
           const value = zScores[key];
           const info = zScoreLabels[key];
           const interpretation = zScores.interpretations[key];
 
           return (
-            <div key={key} className="border border-slate-100 rounded-lg p-4">
-              <div className="flex justify-between items-start mb-2">
-                <div>
+            <div key={key} className="border border-slate-100 rounded-lg p-3 sm:p-4">
+              <div className="flex justify-between items-start gap-2 mb-2">
+                <div className="min-w-0">
                   <span className="text-xs font-semibold text-slate-400 uppercase">
                     {info.label}
                   </span>
                   <p className="text-xs text-slate-500">{info.full}</p>
                 </div>
-                <span className={`text-2xl font-bold ${getZScoreColor(value)}`}>
+                <span className={`text-xl sm:text-2xl font-bold ${getZScoreColor(value)} flex-shrink-0`}>
                   {value > 0 ? '+' : ''}{value.toFixed(2)}
                 </span>
               </div>

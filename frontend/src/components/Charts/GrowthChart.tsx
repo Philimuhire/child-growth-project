@@ -27,13 +27,13 @@ export default function GrowthChart({ zScores }: Props) {
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-      <h3 className="text-lg font-semibold text-slate-900 mb-4">Growth Z-Score Overview</h3>
-      <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 10 }}>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Growth Z-Score Overview</h3>
+      <ResponsiveContainer width="100%" height={240} minHeight={220}>
+        <LineChart data={data} margin={{ top: 10, right: 10, bottom: 10, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis domain={[-4, 4]} />
+          <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+          <YAxis domain={[-4, 4]} tick={{ fontSize: 12 }} />
           <Tooltip
             formatter={(value) => Number(value).toFixed(2)}
             labelFormatter={(label) => {

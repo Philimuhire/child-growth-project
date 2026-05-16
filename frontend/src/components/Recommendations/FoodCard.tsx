@@ -42,12 +42,12 @@ export default function FoodCard({ food }: Props) {
   const categoryLabel = categoryLabels[food.category] || 'Other';
 
   return (
-    <div className="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+    <div className="border border-slate-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
       {/* Header: food name + category pill */}
-      <div className="flex items-start justify-between gap-3 mb-2">
-        <h4 className="font-semibold text-slate-900 text-sm">{food.name}</h4>
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <h4 className="font-semibold text-slate-900 text-sm break-words min-w-0">{food.name}</h4>
         <span
-          className={`text-[10px] px-2 py-0.5 rounded-full font-medium border whitespace-nowrap ${colorClass}`}
+          className={`text-[10px] px-2 py-0.5 rounded-full font-medium border whitespace-nowrap flex-shrink-0 ${colorClass}`}
         >
           {categoryLabel}
         </span>

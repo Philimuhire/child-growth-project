@@ -19,10 +19,10 @@ export default function AssessmentPage() {
   const hasResults = prediction !== null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-900">Child Nutritional Assessment</h1>
-        <p className="text-slate-600 mt-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Child Nutritional Assessment</h1>
+        <p className="text-sm sm:text-base text-slate-600 mt-1">
           Enter child data to receive AI-powered nutritional status prediction and dietary recommendations.
         </p>
       </div>
@@ -84,23 +84,25 @@ export default function AssessmentPage() {
               <div className="flex gap-1 bg-slate-100 rounded-lg p-1 mb-6">
                 <button
                   onClick={() => setActiveTab('results')}
-                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex-1 py-2 px-2 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-colors ${
                     activeTab === 'results'
                       ? 'bg-white text-slate-900 shadow-sm'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  Assessment Results
+                  <span className="sm:hidden">Results</span>
+                  <span className="hidden sm:inline">Assessment Results</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('recommendations')}
-                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex-1 py-2 px-2 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-colors ${
                     activeTab === 'recommendations'
                       ? 'bg-white text-slate-900 shadow-sm'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  Nutrition Recommendations
+                  <span className="sm:hidden">Recommendations</span>
+                  <span className="hidden sm:inline">Nutrition Recommendations</span>
                 </button>
               </div>
 

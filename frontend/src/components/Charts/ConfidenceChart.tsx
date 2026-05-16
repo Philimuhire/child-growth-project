@@ -28,13 +28,13 @@ export default function ConfidenceChart({ probabilities, predictedClass }: Props
   data.sort((a, b) => b.value - a.value);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-      <h3 className="text-lg font-semibold text-slate-900 mb-4">Classification Probabilities</h3>
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Classification Probabilities</h3>
+      <ResponsiveContainer width="100%" height={220} minHeight={200}>
+        <BarChart data={data} layout="vertical" margin={{ left: 10, right: 10 }}>
           <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
-          <YAxis type="category" dataKey="name" width={100} />
+          <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} tick={{ fontSize: 12 }} />
+          <YAxis type="category" dataKey="name" width={80} tick={{ fontSize: 12 }} />
           <Tooltip formatter={(value) => `${value}%`} />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {/* One Cell per bar with the class color */}

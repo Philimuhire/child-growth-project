@@ -77,19 +77,19 @@ export default function ChildInputForm({ onSubmit, loading }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-      <h2 className="text-xl font-semibold text-slate-900 mb-6">Child Assessment Form</h2>
+    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+      <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-5 sm:mb-6">Child Assessment Form</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         {/* Anthropometric Data */}
-        <div className="md:col-span-2">
+        <div className="sm:col-span-2">
           <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
             Anthropometric Data
           </h3>
         </div>
 
         {/* Age input as years and months */}
-        <div className="md:col-span-2">
+        <div className="sm:col-span-2">
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Age
           </label>
@@ -184,7 +184,7 @@ export default function ChildInputForm({ onSubmit, loading }: Props) {
         </div>
 
         {/* Demographic Data */}
-        <div className="md:col-span-2 mt-2">
+        <div className="sm:col-span-2 mt-2">
           <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
             Demographic Data
           </h3>
@@ -302,13 +302,13 @@ export default function ChildInputForm({ onSubmit, loading }: Props) {
         </div>
 
         {/* Contextual / Feeding */}
-        <div className="md:col-span-2 mt-2">
+        <div className="sm:col-span-2 mt-2">
           <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
             Feeding Context
           </h3>
         </div>
 
-        <div className="md:col-span-2">
+        <div className="sm:col-span-2">
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Currently Breastfeeding?
           </label>

@@ -1,12 +1,12 @@
 // Static information page about the project
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-slate-900 mb-6">About This Project</h1>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6">About This Project</h1>
 
-      <div className="space-y-8">
-        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-semibold text-slate-900 mb-3">Research Background</h2>
+      <div className="space-y-6 sm:space-y-8">
+        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">Research Background</h2>
           <p className="text-slate-600 leading-relaxed">
             This system is based on the research project titled{' '}
             <strong>
@@ -20,8 +20,8 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-semibold text-slate-900 mb-3">Methodology</h2>
+        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">Methodology</h2>
           <div className="space-y-3 text-slate-600">
             <p>
               <strong>Dataset:</strong> Rwanda Demographic and Health Survey (RDHS)
@@ -45,8 +45,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-semibold text-slate-900 mb-3">Nutrition Recommendations</h2>
+        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">Nutrition Recommendations</h2>
           <p className="text-slate-600 mb-3">
             The system provides personalized dietary guidance using locally available
             Rwandan foods, mapped to each predicted nutritional condition:
@@ -73,8 +73,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h2 className="text-xl font-semibold text-slate-900 mb-3">Technology Stack</h2>
+        <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mb-3">Technology Stack</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <h3 className="font-semibold text-slate-800">ML Model</h3>

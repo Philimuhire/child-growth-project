@@ -41,8 +41,8 @@ export default function NutritionPlan({ recommendations }: Props) {
   return (
     <div className="space-y-6">
       {/* Key health messages */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Key Health Messages</h3>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Key Health Messages</h3>
         <div className="space-y-3">
           {recommendations.key_messages.map((message, i) => (
             <div
@@ -60,8 +60,8 @@ export default function NutritionPlan({ recommendations }: Props) {
       </div>
 
       {/* Priority nutrients as pill badges */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-3">Priority Nutrients</h3>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-3">Priority Nutrients</h3>
         <div className="flex flex-wrap gap-2">
           {recommendations.priority_nutrients.map((nutrient) => (
             <span
@@ -75,9 +75,9 @@ export default function NutritionPlan({ recommendations }: Props) {
       </div>
 
       {/* Daily meal plan */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-semibold text-slate-900">Daily Meal Plan</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-slate-900">Daily Meal Plan</h3>
           <span className="text-xs text-slate-500">Suggested schedule</span>
         </div>
         <p className="text-sm text-slate-600 mb-5">
@@ -118,8 +118,8 @@ export default function NutritionPlan({ recommendations }: Props) {
       </div>
 
       {/* Recommended foods grouped by category */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Recommended Local Foods</h3>
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Recommended Local Foods</h3>
         <div className="space-y-6">
           {foodGroups.map(({ key, label }) => {
             const items = recommendations.foods.filter((f) => f.category === key);
