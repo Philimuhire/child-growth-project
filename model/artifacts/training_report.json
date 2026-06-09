@@ -3,8 +3,8 @@
   "classification_report": {
     "normal": {
       "precision": 1.0,
-      "recall": 0.9978586723768736,
-      "f1-score": 0.9989281886387996,
+      "recall": 0.9957173447537473,
+      "f1-score": 0.9978540772532188,
       "support": 467.0
     },
     "overweight": {
@@ -20,28 +20,28 @@
       "support": 203.0
     },
     "underweight": {
-      "precision": 0.98,
-      "recall": 0.98,
-      "f1-score": 0.98,
+      "precision": 0.9615384615384616,
+      "recall": 1.0,
+      "f1-score": 0.9803921568627451,
       "support": 50.0
     },
     "wasted": {
-      "precision": 0.8888888888888888,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.9411764705882353,
+      "f1-score": 1.0,
       "support": 8.0
     },
     "accuracy": 0.9973718791064389,
     "macro avg": {
-      "precision": 0.9737777777777777,
-      "recall": 0.9955717344753747,
-      "f1-score": 0.984020931845407,
+      "precision": 0.9923076923076923,
+      "recall": 0.9991434689507495,
+      "f1-score": 0.9956492468231929,
       "support": 761.0
     },
     "weighted avg": {
-      "precision": 0.9975178858227478,
+      "precision": 0.9974729606792682,
       "recall": 0.9973718791064389,
-      "f1-score": 0.9974098237306508,
+      "f1-score": 0.9973948251253487,
       "support": 761.0
     }
   },

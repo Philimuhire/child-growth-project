@@ -13,6 +13,11 @@ env/
 # Model data (not deployed)
 model/data/*.xlsx
 model/data/*.csv
+# Exception: ship the training dataset so the notebook works out of the box
+!model/data/dataset for ML.xlsx
+
+# Lock files from spreadsheet apps (LibreOffice, Excel)
+model/data/.~lock.*
 
 # Training artifacts duplicated in backend/app/ml_artifacts/
 model/artifacts/*.joblib
