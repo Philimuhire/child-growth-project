@@ -21,11 +21,9 @@ function formatNutrient(s: string): string {
 
 // Display config for each meal slot: label, suggested time, badge letter, and color
 const mealConfig: Record<string, { label: string; time: string; initial: string; color: string }> = {
-  breakfast:   { label: 'Breakfast',          time: '7 - 8 AM',   initial: 'B', color: 'bg-amber-100 text-amber-700 border-amber-200' },
-  mid_morning: { label: 'Mid-Morning Snack',  time: '10 AM',      initial: 'M', color: 'bg-orange-100 text-orange-700 border-orange-200' },
-  lunch:       { label: 'Lunch',              time: '12 - 1 PM',  initial: 'L', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
-  afternoon:   { label: 'Afternoon Snack',    time: '3 - 4 PM',   initial: 'A', color: 'bg-cyan-100 text-cyan-700 border-cyan-200' },
-  dinner:      { label: 'Dinner',             time: '6 - 7 PM',   initial: 'D', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
+  breakfast: { label: 'Breakfast', time: '7 - 8 AM',  initial: 'B', color: 'bg-amber-100 text-amber-700 border-amber-200' },
+  lunch:     { label: 'Lunch',     time: '12 - 1 PM', initial: 'L', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
+  dinner:    { label: 'Dinner',    time: '6 - 7 PM',  initial: 'D', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
 };
 
 // Ordered groups for the Recommended Local Foods section
@@ -60,21 +58,24 @@ export default function NutritionPlan({ recommendations }: Props) {
       </div>
 
       {/* Priority nutrients as pill badges */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-3">Priority Nutrients</h3>
-        <div className="flex flex-wrap gap-2">
-          {recommendations.priority_nutrients.map((nutrient) => (
-            <span
-              key={nutrient}
-              className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
-            >
-              {formatNutrient(nutrient)}
-            </span>
-          ))}
+      {recommendations.priority_nutrients.length > 0 && (
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-3">Priority Nutrients</h3>
+          <div className="flex flex-wrap gap-2">
+            {recommendations.priority_nutrients.map((nutrient) => (
+              <span
+                key={nutrient}
+                className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+              >
+                {formatNutrient(nutrient)}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Daily meal plan */}
+      {Object.keys(recommendations.meal_plan).length > 0 && (
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-base sm:text-lg font-semibold text-slate-900">Daily Meal Plan</h3>
@@ -116,8 +117,10 @@ export default function NutritionPlan({ recommendations }: Props) {
           })}
         </div>
       </div>
+      )}
 
       {/* Recommended foods grouped by category */}
+      {recommendations.foods.length > 0 && (
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Recommended Local Foods</h3>
         <div className="space-y-6">
@@ -157,6 +160,7 @@ export default function NutritionPlan({ recommendations }: Props) {
           })()}
         </div>
       </div>
+      )}
     </div>
   );
 }
