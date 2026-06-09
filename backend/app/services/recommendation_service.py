@@ -115,20 +115,12 @@ def _select_foods_for_condition(condition: str, age_months: int) -> list[FoodIte
     ]
 
 
-# Build a daily meal plan from the ranked food list
+# Build a daily meal plan from the ranked food list.
+# Each of the three meals contains a carbohydrate, a protein, and a fruit or
+# vegetable — the three groups that make up a balanced plate.
 def _generate_meal_plan(
     condition: str, foods: list[FoodItem], age_months: int
 ) -> dict[str, list[str]]:
-    # Children under 6 months: exclusive breastfeeding
-    if age_months < 6:
-        return {
-            "breakfast":   ["Breast milk"],
-            "mid_morning": ["Breast milk"],
-            "lunch":       ["Breast milk"],
-            "afternoon":   ["Breast milk"],
-            "dinner":      ["Breast milk"],
-        }
-
     # Group foods by category (English names only)
     food_by_category = {}
     for f in foods:
@@ -139,47 +131,65 @@ def _generate_meal_plan(
     carbs    = food_by_category.get("carbohydrate", ["Maize porridge"])
     fruits   = food_by_category.get("fruit", ["Bananas"])
     vegs     = food_by_category.get("vegetable", ["Green vegetables"])
-    dairy    = food_by_category.get("dairy", ["Milk"])
 
-    # Compose meals using top and second-ranked foods for variety
+    def pick(items: list[str], i: int) -> str:
+        return items[i % len(items)] if items else ""
+
+    # Carb portion phrasing depends on the condition
+    carb_prefix = "Small portion of " if condition == "overweight" else ""
+
     plan = {
         "breakfast": [
-            f"{carbs[0]} enriched with {dairy[0] if dairy else proteins[0]}",
-        ],
-        "mid_morning": [
-            fruits[0] if fruits else "Fresh fruit",
+            f"{carb_prefix}{pick(carbs, 0)}",
+            pick(proteins, 0),
+            pick(fruits, 0),
         ],
         "lunch": [
-            f"{proteins[0]} with {carbs[-1] if len(carbs) > 1 else carbs[0]}",
-            vegs[0] if vegs else "Steamed vegetables",
-        ],
-        "afternoon": [
-            f"{dairy[0]}" if dairy else f"Small portion of {proteins[-1] if len(proteins) > 1 else proteins[0]}",
+            f"{carb_prefix}{pick(carbs, -1)}",
+            pick(proteins, 1),
+            pick(vegs, 0),
         ],
         "dinner": [
-            f"{proteins[-1] if len(proteins) > 1 else proteins[0]} with {vegs[-1] if len(vegs) > 1 else vegs[0]}",
-            f"Small portion of {carbs[0]}",
+            f"{carb_prefix}{pick(carbs, 0)}",
+            pick(proteins, -1),
+            pick(vegs, -1),
         ],
     }
+
+    # Drop any empty placeholders
+    plan = {meal: [item for item in items if item.strip()] for meal, items in plan.items()}
+
+    # Wasted children need energy-dense additions
+    if condition == "wasted":
+        plan["breakfast"].insert(0, "Energy-dense porridge with groundnut paste")
 
     # Add breastfeeding note for children under 24 months
     if age_months < 24:
         for meal in plan:
             plan[meal].append("Continue breastfeeding on demand")
 
-    # Condition-specific adjustments
-    if condition == "wasted":
-        plan["mid_morning"].insert(0, "Energy-dense porridge with groundnut paste")
-        plan["afternoon"].insert(0, "Extra snack: mashed banana with groundnut paste")
-    elif condition == "overweight":
-        plan["mid_morning"] = ["Fresh fruit or vegetable sticks"]
-        plan["afternoon"] = ["Small portion of fruit"]
-
     return plan
+
+
+# Guidance returned for infants under 6 months: exclusive breastfeeding only,
+# no solid foods or meal plan.
+EXCLUSIVE_BREASTFEEDING_MESSAGES = [
+    "Exclusive breastfeeding is recommended for the first 6 months.",
+]
 
 
 # Build the full recommendation response
 def get_recommendations(predicted_class: str, age_months: int) -> RecommendationResponse:
+    # Under 6 months: exclusive breastfeeding only, no food/meal recommendations
+    if age_months < 6:
+        return RecommendationResponse(
+            predicted_class=predicted_class,
+            foods=[],
+            meal_plan={},
+            key_messages=EXCLUSIVE_BREASTFEEDING_MESSAGES,
+            priority_nutrients=[],
+        )
+
     foods = _select_foods_for_condition(predicted_class, age_months)
     meal_plan = _generate_meal_plan(predicted_class, foods, age_months)
     messages = KEY_MESSAGES.get(predicted_class, KEY_MESSAGES["normal"])
