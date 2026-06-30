@@ -24,12 +24,12 @@ export default function PredictionCard({ predictedClass, confidence }: Props) {
   return (
     <div className={`rounded-xl border-2 ${config.border} ${config.bg} p-4 sm:p-6`}>
       <h3 className="text-xs sm:text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
-        Predicted Status
+        Nutritional Status (WHO)
       </h3>
       <p className={`text-2xl sm:text-3xl font-bold ${config.color} mb-2`}>{config.label}</p>
       <div className="mt-4">
         <div className="flex justify-between text-sm mb-1">
-          <span className="text-slate-600">Confidence</span>
+          <span className="text-slate-600" title="How strongly the ML model's profile-based assessment supports the WHO diagnosis">Model agreement</span>
           <span className={`font-semibold ${config.color}`}>{percent}%</span>
         </div>
         <div className="w-full bg-white rounded-full h-3 overflow-hidden">

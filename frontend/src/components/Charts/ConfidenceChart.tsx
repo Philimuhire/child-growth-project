@@ -29,7 +29,8 @@ export default function ConfidenceChart({ probabilities, predictedClass }: Props
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
-      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4">Classification Probabilities</h3>
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-1">Model Risk Assessment</h3>
+      <p className="text-xs text-slate-500 mb-4">Profile-based probability the ML model assigns to each category (supplementary to the WHO diagnosis)</p>
       <ResponsiveContainer width="100%" height={220} minHeight={200}>
         <BarChart data={data} layout="vertical" margin={{ left: 10, right: 10 }}>
           <CartesianGrid strokeDasharray="3 3" horizontal={false} />
