@@ -5,8 +5,11 @@ import joblib
 
 from ..config import MODEL_PATH, LABEL_ENCODER_PATH, SCALER_PATH, FEATURE_COLUMNS_PATH, ML_ARTIFACTS_DIR
 from ..models.schemas import ChildInput, PredictionResponse, ZScoreResult
-from ..models.enums import RiskLevel
-from .zscore_service import compute_all_zscores
+from .zscore_service import (
+    compute_all_zscores,
+    classify_nutritional_status,
+    risk_level_from_zscores,
+)
 
 
 # Default categorical encoding maps (used as fallback)
@@ -112,24 +115,30 @@ class MLService:
             height_cm=child.height_cm,
         )
 
-        # Encode features and run inference
+        # Authoritative diagnosis: nutritional status is defined by the WHO
+        # Z-score thresholds, so it is computed directly from the Z-scores. This
+        # guarantees the headline result never contradicts the Z-scores shown to
+        # the user, and is 100% consistent with the WHO standard.
+        predicted_class = classify_nutritional_status(z_scores)
+
+        # The ML model provides a profile-based risk distribution across the five
+        # categories (learned from anthropometry + socioeconomic context). It is
+        # supplementary information, not the diagnosis.
         features = self._encode_features(child, z_scores)
         probabilities = self.model.predict_proba(features)[0]
-        predicted_idx = np.argmax(probabilities)
-
-        # Decode predicted class
         class_names = self.label_encoder.classes_
-        predicted_class = class_names[predicted_idx]
-        confidence = float(probabilities[predicted_idx])
-
-        # Build probabilities dict for the response
         prob_dict = {
             class_names[i]: round(float(probabilities[i]), 4)
             for i in range(len(class_names))
         }
 
-        # Compute risk level
-        risk_level = self._compute_risk_level(predicted_class, confidence)
+        # "Confidence" = how much the model's profile-based assessment supports
+        # the WHO diagnosis. High = the child's profile is typical for this
+        # status; low = the profile looks atypical (itself a useful signal).
+        confidence = prob_dict.get(predicted_class, 0.0)
+
+        # Clinical risk level from the diagnosis and Z-score severity.
+        risk_level = risk_level_from_zscores(predicted_class, z_scores)
 
         # Wrap Z-scores in the response model
         z_score_result = ZScoreResult(
@@ -147,19 +156,6 @@ class MLService:
             risk_level=risk_level,
             z_scores=z_score_result,
         )
-
-    # Map (predicted_class, confidence) to a risk level label
-    def _compute_risk_level(self, predicted_class: str, confidence: float) -> str:
-        if predicted_class == "normal":
-            return RiskLevel.LOW.value
-
-        if predicted_class in ("wasted", "underweight") and confidence > 0.7:
-            return RiskLevel.CRITICAL.value
-
-        if confidence > 0.5:
-            return RiskLevel.HIGH.value
-
-        return RiskLevel.MODERATE.value
 
 
 # Singleton instance imported by main.py and routers

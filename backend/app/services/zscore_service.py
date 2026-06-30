@@ -120,6 +120,44 @@ def compute_all_zscores(
     }
 
 
+# Classify nutritional status directly from the WHO Z-scores.
+# This is the authoritative diagnosis: nutritional status is, by definition, a
+# deterministic function of the Z-scores. The priority order matches the labels
+# the ML model was trained on (wasted > underweight > stunted > overweight > normal).
+def classify_nutritional_status(z_scores: dict) -> str:
+    if z_scores["whz"] < -2:
+        return "wasted"
+    if z_scores["waz"] < -2:
+        return "underweight"
+    if z_scores["haz"] < -2:
+        return "stunted"
+    if z_scores["baz"] > 2:
+        return "overweight"
+    return "normal"
+
+
+# Clinical risk level from the diagnosed status and Z-score severity.
+# Severe forms (any defining Z-score beyond +/-3 SD) escalate the risk level.
+def risk_level_from_zscores(status: str, z_scores: dict) -> str:
+    if status == "normal":
+        return "low"
+
+    severe = (
+        z_scores["whz"] < -3
+        or z_scores["waz"] < -3
+        or z_scores["haz"] < -3
+        or z_scores["baz"] > 3
+    )
+
+    if status in ("wasted", "underweight"):
+        return "critical" if severe else "high"
+    if status == "stunted":
+        return "high" if severe else "moderate"
+    if status == "overweight":
+        return "high" if z_scores["baz"] > 3 else "moderate"
+    return "moderate"
+
+
 # Interpret WAZ value
 def _interpret_waz(z: float) -> str:
     if z < -3: return "Severely underweight"
