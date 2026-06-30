@@ -1,47 +1,47 @@
 {
-  "accuracy": 0.9973718791064389,
+  "accuracy": 0.8777923784494087,
   "classification_report": {
     "normal": {
-      "precision": 1.0,
-      "recall": 0.9957173447537473,
-      "f1-score": 0.9978540772532188,
+      "precision": 0.9081419624217119,
+      "recall": 0.9314775160599572,
+      "f1-score": 0.919661733615222,
       "support": 467.0
     },
     "overweight": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
+      "precision": 0.7037037037037037,
+      "recall": 0.5757575757575758,
+      "f1-score": 0.6333333333333333,
       "support": 33.0
     },
     "stunted": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
+      "precision": 0.84,
+      "recall": 0.8275862068965517,
+      "f1-score": 0.8337468982630273,
       "support": 203.0
     },
     "underweight": {
-      "precision": 0.9615384615384616,
-      "recall": 1.0,
-      "f1-score": 0.9803921568627451,
+      "precision": 0.8367346938775511,
+      "recall": 0.82,
+      "f1-score": 0.8282828282828283,
       "support": 50.0
     },
     "wasted": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
+      "precision": 0.8333333333333334,
+      "recall": 0.625,
+      "f1-score": 0.7142857142857143,
       "support": 8.0
     },
-    "accuracy": 0.9973718791064389,
+    "accuracy": 0.8777923784494087,
     "macro avg": {
-      "precision": 0.9923076923076923,
-      "recall": 0.9991434689507495,
-      "f1-score": 0.9956492468231929,
+      "precision": 0.82438273866726,
+      "recall": 0.7559642597428169,
+      "f1-score": 0.785862101556025,
       "support": 761.0
     },
     "weighted avg": {
-      "precision": 0.9974729606792682,
-      "recall": 0.9973718791064389,
-      "f1-score": 0.9973948251253487,
+      "precision": 0.875621445510783,
+      "recall": 0.8777923784494087,
+      "f1-score": 0.8761643588359137,
       "support": 761.0
     }
   },
@@ -57,11 +57,7 @@
     "district",
     "sanitation_type",
     "water_source",
-    "currently_breastfeeding",
-    "waz",
-    "haz",
-    "whz",
-    "baz"
+    "currently_breastfeeding"
   ],
   "class_names": [
     "normal",
