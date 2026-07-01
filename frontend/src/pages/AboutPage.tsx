@@ -29,8 +29,9 @@ export default function AboutPage() {
             </p>
             <p>
               <strong>Model:</strong> XGBoost (Extreme Gradient Boosting) classifier
-              trained with 14 features including anthropometric measurements,
-              demographic variables, and WHO-derived Z-scores.
+              trained with 12 features including anthropometric measurements and
+              demographic variables. WHO-derived Z-scores are used to define the
+              nutritional status categories.
             </p>
             <p>
               <strong>Classification:</strong> Five nutritional categories &mdash;

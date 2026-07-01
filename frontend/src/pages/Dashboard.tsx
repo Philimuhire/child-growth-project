@@ -48,11 +48,11 @@ export default function Dashboard() {
 
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 text-center">
           <div className="w-12 h-12 bg-green-100 rounded-xl mx-auto mb-3 flex items-center justify-center">
-            <span className="text-green-600 font-bold text-xl">17</span>
+            <span className="text-green-600 font-bold text-xl">12</span>
           </div>
           <h3 className="font-semibold text-slate-900">Input Features</h3>
           <p className="text-sm text-slate-500 mt-1">
-            Anthropometric, demographic, and derived WHO Z-scores
+            Anthropometric and socioeconomic factors
           </p>
         </div>
 
