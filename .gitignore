@@ -43,3 +43,6 @@ Thumbs.db
 # Environment
 .env
 *.log
+
+# SQLite user-accounts database
+backend/app/*.db

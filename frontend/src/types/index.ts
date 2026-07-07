@@ -92,3 +92,24 @@ export interface HealthResponse {
   status: string;
   model_loaded: boolean;
 }
+
+// --- Authentication ---
+
+// A logged-in user
+export interface User {
+  id: number;
+  username: string;
+}
+
+// Credentials sent to POST /api/auth/register and /api/auth/login
+export interface AuthCredentials {
+  username: string;
+  password: string;
+}
+
+// Response from register / login
+export interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  user: User;
+}

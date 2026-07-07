@@ -19,6 +19,20 @@ FEATURE_COLUMNS_PATH = ML_ARTIFACTS_DIR / "feature_columns.joblib"
 WHO_REFERENCE_PATH = BASE_DIR / "data" / "who_reference.json"
 RWANDAN_FOODS_PATH = BASE_DIR / "data" / "rwandan_foods.json"
 
+# --- Authentication / database settings ---
+# SQLite database file storing user accounts (self-contained, no external service)
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'app.db'}")
+
+# JWT signing settings. In production, set AUTH_SECRET_KEY to a long random value.
+JWT_SECRET_KEY = os.getenv("AUTH_SECRET_KEY", "dev-secret-change-me-in-production")
+JWT_ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "10080"))  # 7 days
+
+# Default account seeded on startup if it doesn't exist yet.
+# Override via env vars in production.
+DEFAULT_USER_USERNAME = os.getenv("DEFAULT_USER_USERNAME", "FlorenceUwase")
+DEFAULT_USER_PASSWORD = os.getenv("DEFAULT_USER_PASSWORD", "Uwafofo@@123")
+
 # API metadata shown in Swagger UI (/docs)
 API_TITLE = "Child Growth Monitor API"
 API_DESCRIPTION = "AI-powered child growth monitoring and nutrition recommendation system for Rwanda"

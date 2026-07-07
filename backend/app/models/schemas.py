@@ -125,3 +125,36 @@ class RecommendationInput(BaseModel):
 class HealthResponse(BaseModel):
     status: str
     model_loaded: bool
+
+
+# --- Authentication schemas ---
+
+# Request body for POST /api/auth/register and /api/auth/login
+class AuthInput(BaseModel):
+    username: str = Field(min_length=3, max_length=50, description="Unique username")
+    password: str = Field(min_length=6, max_length=128, description="Account password")
+
+    @field_validator("username")
+    @classmethod
+    def _normalize_username(cls, v: str) -> str:
+        v = v.strip().lower()
+        if not v:
+            raise ValueError("Username cannot be empty")
+        if not all(c.isalnum() or c in "_-." for c in v):
+            raise ValueError("Username may only contain letters, numbers, and _ - .")
+        return v
+
+
+# Public representation of a user (never includes the password hash)
+class UserResponse(BaseModel):
+    id: int
+    username: str
+
+    model_config = {"from_attributes": True}
+
+
+# Response body for successful login / registration
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse

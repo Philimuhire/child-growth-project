@@ -1,7 +1,8 @@
 // Top navigation bar shown on every page
 
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const navLinks = [
   { path: '/', label: 'Dashboard' },
@@ -11,6 +12,8 @@ const navLinks = [
 
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const linkClass = (path: string) =>
@@ -19,6 +22,42 @@ export default function Header() {
         ? 'bg-emerald-50 text-emerald-700'
         : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
     }`;
+
+  const handleLogout = () => {
+    logout();
+    setMenuOpen(false);
+    navigate('/');
+  };
+
+  // Auth controls: username + Logout when signed in, Login / Sign up otherwise
+  const authControls = (stacked: boolean) =>
+    user ? (
+      <div className={stacked ? 'flex flex-col gap-1' : 'flex items-center gap-2'}>
+        <span className="px-3 py-2 text-sm text-slate-500">
+          Signed in as <span className="font-semibold text-slate-700">{user.username}</span>
+        </span>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors text-left"
+        >
+          Logout
+        </button>
+      </div>
+    ) : (
+      <div className={stacked ? 'flex flex-col gap-1' : 'flex items-center gap-2'}>
+        <Link to="/login" onClick={() => setMenuOpen(false)} className={linkClass('/login')}>
+          Login
+        </Link>
+        <Link
+          to="/register"
+          onClick={() => setMenuOpen(false)}
+          className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-colors no-underline text-center"
+        >
+          Sign up
+        </Link>
+      </div>
+    );
 
   return (
     <header className="bg-white border-b border-slate-200 shadow-sm">
@@ -40,13 +79,16 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop nav — page links only for signed-in users */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link key={link.path} to={link.path} className={linkClass(link.path)}>
-                {link.label}
-              </Link>
-            ))}
+            {user &&
+              navLinks.map((link) => (
+                <Link key={link.path} to={link.path} className={linkClass(link.path)}>
+                  {link.label}
+                </Link>
+              ))}
+            {user && <span className="w-px h-6 bg-slate-200 mx-2" />}
+            {authControls(false)}
           </nav>
 
           {/* Mobile menu toggle */}
@@ -70,16 +112,19 @@ export default function Header() {
         {/* Mobile dropdown nav */}
         {menuOpen && (
           <nav className="md:hidden pb-3 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={linkClass(link.path)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {user &&
+              navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass(link.path)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            {user && <span className="h-px bg-slate-200 my-2" />}
+            {authControls(true)}
           </nav>
         )}
       </div>

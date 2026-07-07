@@ -6,10 +6,15 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import API_TITLE, API_DESCRIPTION, API_VERSION, ALLOWED_ORIGINS
+from .config import (
+    API_TITLE, API_DESCRIPTION, API_VERSION, ALLOWED_ORIGINS,
+    DEFAULT_USER_USERNAME, DEFAULT_USER_PASSWORD,
+)
+from .database import init_db, SessionLocal
 from .models.schemas import HealthResponse
+from .services import auth_service
 from .services.ml_service import ml_service
-from .routers import predict, zscore, recommend
+from .routers import predict, zscore, recommend, auth
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +22,21 @@ logger = logging.getLogger(__name__)
 # Runs once on app startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Create the user-accounts database tables if they don't exist yet
+    try:
+        init_db()
+        logger.info("User database initialized")
+
+        # Seed the default account if it isn't already present
+        db = SessionLocal()
+        try:
+            if auth_service.ensure_user(db, DEFAULT_USER_USERNAME, DEFAULT_USER_PASSWORD):
+                logger.info(f"Seeded default user '{DEFAULT_USER_USERNAME.lower()}'")
+        finally:
+            db.close()
+    except Exception as e:
+        logger.error(f"Failed to initialize user database: {e}")
+
     # Load the trained ML model into memory
     try:
         ml_service.load_model()
@@ -45,7 +65,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register the three API routers
+# Register the API routers
+app.include_router(auth.router)
 app.include_router(predict.router)
 app.include_router(zscore.router)
 app.include_router(recommend.router)
